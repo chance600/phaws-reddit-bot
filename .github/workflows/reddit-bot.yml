@@ -1,0 +1,37 @@
+name: Phaws Reddit Bot
+
+on:
+  schedule:
+    # Every 2 hours; change if needed
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Reddit bot
+        env:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+          REDDIT_TARGET_SUBREDDITS: ${{ secrets.REDDIT_TARGET_SUBREDDITS }}
+          PHAWS_EXPERIMENT_TAG: ${{ secrets.PHAWS_EXPERIMENT_TAG }}
+        run: |
+          python bot.py
