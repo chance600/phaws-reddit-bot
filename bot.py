@@ -31,7 +31,7 @@ def build_reddit_client() -> praw.Reddit:
 def get_target_subreddits() -> list[str]:
     raw = os.environ.get(
         "REDDIT_TARGET_SUBREDDITS",
-        "Artificial,LocalLLaMA,MachineLearning,ChatGPT,DataIsBeautiful",
+        "dogs,cats,Pets,rarepuppers,aww,petcare",
     )
     return [s.strip() for s in raw.split(",") if s.strip()]
 
@@ -39,27 +39,24 @@ def get_target_subreddits() -> list[str]:
 def build_content_queue() -> list[dict]:
     return [
         {
-            "title": "What are your favorite underrated AI research directions right now?",
+            "title": "What's the most unexpectedly wholesome moment you've had with your pet?",
             "selftext": (
-                "Everyone talks about ever-bigger LLMs, but I'm curious about the "
-                "more niche or overlooked areas.\n\n"
-                "What are you working on or quietly bullish on that almost nobody "
-                "else around you is talking about?"
+                "We all know pets are amazing, but sometimes they do something that just catches you completely off guard.\n\n"
+                "What's a moment where your pet surprised you with how caring, smart, or just plain wonderful they are?"
             ),
         },
         {
-            "title": "Show me your most practical AI workflow that saves you real hours",
+            "title": "Pet owners: what's one thing you wish you knew before getting your pet?",
             "selftext": (
-                "Not demos, not hype — the boring-but-powerful stuff.\n\n"
-                "What AI workflow actually saves you hours every week, and how "
-                "did you wire it together?"
+                "Looking back, what surprised you most about pet ownership?\n\n"
+                "Whether it's about their health, behavior, or just day-to-day life with them — what do you wish someone had told you?"
             ),
         },
         {
-            "title": "LLMs as teammates, not tools: how are you structuring that?",
+            "title": "Show me your pet's weirdest habit or quirk",
             "selftext": (
-                "If you treat models as persistent collaborators, not just chat boxes, "
-                "how are you setting up memory, task queues, and guardrails right now?"
+                "Every pet has that ONE thing they do that's completely bizarre but also totally endearing.\n\n"
+                "What's your pet's signature weird move? Bonus points if you have no idea why they do it."
             ),
         },
     ]
